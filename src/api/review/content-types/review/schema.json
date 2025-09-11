@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "reviews",
+  "info": {
+    "singularName": "review",
+    "pluralName": "reviews",
+    "displayName": "Reviews"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "author": {
+      "type": "string",
+      "required": true
+    },
+    "rating": {
+      "type": "decimal",
+      "required": true
+    },
+    "comment": {
+      "type": "text"
+    },
+    "chef": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::chef.chef",
+      "inversedBy": "reviews"
+    },
+    "dish": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::dish.dish",
+      "inversedBy": "reviews"
+    }
+  }
+}

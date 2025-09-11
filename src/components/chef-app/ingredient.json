@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_chef_app_ingredients",
+  "info": {
+    "displayName": "ingredient"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "quantity": {
+      "type": "decimal"
+    },
+    "unit": {
+      "type": "string"
+    },
+    "perPerson": {
+      "type": "boolean"
+    }
+  },
+  "config": {}
+}

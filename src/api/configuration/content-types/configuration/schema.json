@@ -1,0 +1,30 @@
+{
+  "kind": "singleType",
+  "collectionName": "configurations",
+  "info": {
+    "singularName": "configuration",
+    "pluralName": "configurations",
+    "displayName": "Configuration"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "taxRate": {
+      "type": "decimal",
+      "default": 0.14
+    },
+    "serviceFeeRate": {
+      "type": "decimal"
+    },
+    "currencySymbol": {
+      "type": "string",
+      "default": "€"
+    },
+    "currencyCode": {
+      "type": "string",
+      "default": "EUR"
+    }
+  }
+}

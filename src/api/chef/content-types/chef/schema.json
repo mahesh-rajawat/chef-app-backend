@@ -1,0 +1,98 @@
+{
+  "kind": "collectionType",
+  "collectionName": "chefs",
+  "info": {
+    "singularName": "chef",
+    "pluralName": "chefs",
+    "displayName": "Chef"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "rating": {
+      "type": "decimal"
+    },
+    "reviewCount": {
+      "type": "integer"
+    },
+    "priceRange": {
+      "type": "enumeration",
+      "enum": [
+        "Budget",
+        "Standard",
+        "Premium",
+        "Luxury"
+      ]
+    },
+    "imageUrl": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "bio": {
+      "type": "blocks"
+    },
+    "photos": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "specialtyDishes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::dish.dish"
+    },
+    "reviews": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::review.review",
+      "mappedBy": "chef"
+    },
+    "availability": {
+      "type": "component",
+      "component": "chef-app.weekly-schedule",
+      "repeatable": true
+    },
+    "holidays": {
+      "type": "component",
+      "component": "chef-app.availability",
+      "repeatable": true
+    },
+    "booking": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::booking.booking",
+      "mappedBy": "chef"
+    },
+    "cuisines": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::cuisine.cuisine",
+      "inversedBy": "chefs"
+    },
+    "latitude": {
+      "type": "decimal",
+      "required": false
+    },
+    "longitude": {
+      "type": "decimal",
+      "required": false
+    }
+  }
+}

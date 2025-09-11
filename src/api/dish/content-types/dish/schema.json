@@ -1,0 +1,97 @@
+{
+  "kind": "collectionType",
+  "collectionName": "dishes",
+  "info": {
+    "singularName": "dish",
+    "pluralName": "dishes",
+    "displayName": "Dish"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "baseChefFee": {
+      "type": "decimal",
+      "required": true
+    },
+    "imageUrl": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "isFeatured": {
+      "type": "boolean"
+    },
+    "tags": {
+      "type": "text"
+    },
+    "prepTime": {
+      "type": "string"
+    },
+    "rating": {
+      "type": "decimal"
+    },
+    "reviewCount": {
+      "type": "integer"
+    },
+    "ingredients": {
+      "type": "component",
+      "component": "chef-app.ingredient",
+      "repeatable": true
+    },
+    "nutrition": {
+      "type": "component",
+      "component": "chef-app.nutrition",
+      "repeatable": false
+    },
+    "reviews": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::review.review",
+      "mappedBy": "dish"
+    },
+    "dietaryType": {
+      "type": "enumeration",
+      "enum": [
+        "Veg",
+        "Non-Veg",
+        "Vegan"
+      ]
+    },
+    "cuisines": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::cuisine.cuisine",
+      "mappedBy": "dishes"
+    },
+    "chef": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::chef.chef"
+    },
+    "course": {
+      "type": "enumeration",
+      "enum": [
+        "Starter",
+        "Main Course",
+        "Dessert"
+      ]
+    },
+    "feePerPerson": {
+      "type": "integer"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "Strapi Backend",
+  // Point to the root docker-compose.yml file
+  "dockerComposeFile": [
+    "../../docker-compose.yml"
+  ],
+  // Specify that this container is for the 'backend' service
+  "service": "backend",
+  "workspaceFolder": "/workspace",
+  // Install useful extensions
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint"
+      ]
+    }
+  },
+  // Run as the non-root 'node' user
+  "remoteUser": "node"
+}

@@ -1,0 +1,58 @@
+{
+  "kind": "collectionType",
+  "collectionName": "bookings",
+  "info": {
+    "singularName": "booking",
+    "pluralName": "bookings",
+    "displayName": "Booking"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "bookingDate": {
+      "type": "date",
+      "required": true
+    },
+    "bookingTime": {
+      "type": "string",
+      "required": true
+    },
+    "guestCount": {
+      "type": "integer",
+      "required": true
+    },
+    "totalFee": {
+      "type": "decimal",
+      "required": true
+    },
+    "statusCode": {
+      "type": "enumeration",
+      "enum": [
+        "Confirmed",
+        "Complete",
+        "Cancelled",
+        "Pending"
+      ]
+    },
+    "comments": {
+      "type": "text"
+    },
+    "dishes": {
+      "type": "json"
+    },
+    "chef": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::chef.chef",
+      "inversedBy": "booking"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "booking"
+    }
+  }
+}

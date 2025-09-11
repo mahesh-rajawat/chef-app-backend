@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_chef_app_availabilities",
+  "info": {
+    "displayName": "Holidays"
+  },
+  "options": {},
+  "attributes": {
+    "date": {
+      "type": "date"
+    }
+  },
+  "config": {}
+}

@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_chef_app_weekly_schedules",
+  "info": {
+    "displayName": "Weekly Schedule"
+  },
+  "options": {},
+  "attributes": {
+    "dayOfWeek": {
+      "type": "enumeration",
+      "enum": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ]
+    },
+    "isAvailable": {
+      "type": "boolean"
+    },
+    "timeSlots": {
+      "type": "text"
+    }
+  },
+  "config": {}
+}

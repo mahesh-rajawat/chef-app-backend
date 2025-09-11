@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cuisines",
+  "info": {
+    "singularName": "cuisine",
+    "pluralName": "cuisines",
+    "displayName": "Cuisine"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "imageUrl": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "dishes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::dish.dish",
+      "inversedBy": "cuisines"
+    },
+    "chefs": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::chef.chef",
+      "mappedBy": "cuisines"
+    }
+  }
+}

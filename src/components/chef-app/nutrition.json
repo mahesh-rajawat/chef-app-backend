@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_chef_app_nutritions",
+  "info": {
+    "displayName": "Nutrition"
+  },
+  "options": {},
+  "attributes": {
+    "protein": {
+      "type": "string"
+    },
+    "fats": {
+      "type": "string"
+    },
+    "carbs": {
+      "type": "string"
+    },
+    "calories": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}
