@@ -424,39 +424,109 @@ export interface ApiChefChef extends Struct.CollectionTypeSchema {
   options: {
     draftAndPublish: true;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
     acceptsCustomMenus: Schema.Attribute.Boolean &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
       Schema.Attribute.DefaultTo<false>;
-    availability: Schema.Attribute.Component<'chef-app.weekly-schedule', true>;
-    bio: Schema.Attribute.Blocks;
+    availability: Schema.Attribute.Component<'chef-app.weekly-schedule', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    bio: Schema.Attribute.Blocks &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     booking: Schema.Attribute.Relation<'oneToOne', 'api::booking.booking'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     cuisines: Schema.Attribute.Relation<'manyToMany', 'api::cuisine.cuisine'>;
-    holidays: Schema.Attribute.Component<'chef-app.availability', true>;
-    hourlyRate: Schema.Attribute.Decimal;
-    imageUrl: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    latitude: Schema.Attribute.Decimal;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::chef.chef'> &
-      Schema.Attribute.Private;
-    longitude: Schema.Attribute.Decimal;
-    name: Schema.Attribute.String & Schema.Attribute.Required;
+    holidays: Schema.Attribute.Component<'chef-app.availability', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    hourlyRate: Schema.Attribute.Decimal &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    imageUrl: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    latitude: Schema.Attribute.Decimal &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::chef.chef'>;
+    longitude: Schema.Attribute.Decimal &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     photos: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios',
       true
-    >;
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     priceRange: Schema.Attribute.Enumeration<
       ['Budget', 'Standard', 'Premium', 'Luxury']
-    >;
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     publishedAt: Schema.Attribute.DateTime;
     quote_request: Schema.Attribute.Relation<
       'oneToOne',
       'api::quote-request.quote-request'
     >;
-    rating: Schema.Attribute.Decimal;
-    reviewCount: Schema.Attribute.Integer;
+    rating: Schema.Attribute.Decimal &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    reviewCount: Schema.Attribute.Integer &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     reviews: Schema.Attribute.Relation<'oneToMany', 'api::review.review'>;
     specialtyDishes: Schema.Attribute.Relation<'oneToMany', 'api::dish.dish'>;
     updatedAt: Schema.Attribute.DateTime;

@@ -60,6 +60,12 @@ export default {
     extensionService.use(({ nexus }) => ({
       types: [
         nexus.extendType({
+          type: 'Chef',
+          definition(t) {
+            t.id('id');
+          },
+        }),
+        nexus.extendType({
           type: 'UsersPermissionsMe',
           definition(t) {
             // Add the favoriteChefs relation
@@ -72,7 +78,6 @@ export default {
                   root.id,
                   { populate: ['favoriteChefs'] }
                 );
-                console.log(fullUser);
                 return {
                   nodes: fullUser.favoriteChefs
                 };
