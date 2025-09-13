@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "quote_requests",
+  "info": {
+    "singularName": "quote-request",
+    "pluralName": "quote-requests",
+    "displayName": "Quote Request"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "eventDetails": {
+      "type": "text"
+    },
+    "request_status": {
+      "type": "enumeration",
+      "default": "Pending",
+      "enum": [
+        "Pending",
+        "Accepted",
+        "Rejected"
+      ]
+    },
+    "user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "quote_request"
+    },
+    "chef": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::chef.chef",
+      "inversedBy": "quote_request"
+    },
+    "chefResponse": {
+      "type": "blocks"
+    },
+    "proposedFee": {
+      "type": "decimal"
+    }
+  }
+}

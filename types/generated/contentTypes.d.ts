@@ -408,7 +408,7 @@ export interface ApiBookingBooking extends Struct.CollectionTypeSchema {
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     user: Schema.Attribute.Relation<
-      'oneToOne',
+      'manyToOne',
       'plugin::users-permissions.user'
     >;
   };
@@ -425,6 +425,8 @@ export interface ApiChefChef extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    acceptsCustomMenus: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
     availability: Schema.Attribute.Component<'chef-app.weekly-schedule', true>;
     bio: Schema.Attribute.Blocks;
     booking: Schema.Attribute.Relation<'oneToOne', 'api::booking.booking'>;
@@ -433,6 +435,7 @@ export interface ApiChefChef extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     cuisines: Schema.Attribute.Relation<'manyToMany', 'api::cuisine.cuisine'>;
     holidays: Schema.Attribute.Component<'chef-app.availability', true>;
+    hourlyRate: Schema.Attribute.Decimal;
     imageUrl: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     latitude: Schema.Attribute.Decimal;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -448,6 +451,10 @@ export interface ApiChefChef extends Struct.CollectionTypeSchema {
       ['Budget', 'Standard', 'Premium', 'Luxury']
     >;
     publishedAt: Schema.Attribute.DateTime;
+    quote_request: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::quote-request.quote-request'
+    >;
     rating: Schema.Attribute.Decimal;
     reviewCount: Schema.Attribute.Integer;
     reviews: Schema.Attribute.Relation<'oneToMany', 'api::review.review'>;
@@ -559,6 +566,46 @@ export interface ApiDishDish extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+  };
+}
+
+export interface ApiQuoteRequestQuoteRequest
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'quote_requests';
+  info: {
+    displayName: 'Quote Request';
+    pluralName: 'quote-requests';
+    singularName: 'quote-request';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    chef: Schema.Attribute.Relation<'oneToOne', 'api::chef.chef'>;
+    chefResponse: Schema.Attribute.Blocks;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    eventDetails: Schema.Attribute.Text;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::quote-request.quote-request'
+    > &
+      Schema.Attribute.Private;
+    proposedFee: Schema.Attribute.Decimal;
+    publishedAt: Schema.Attribute.DateTime;
+    request_status: Schema.Attribute.Enumeration<
+      ['Pending', 'Accepted', 'Rejected']
+    > &
+      Schema.Attribute.DefaultTo<'Pending'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    user: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
   };
 }
 
@@ -1053,7 +1100,7 @@ export interface PluginUsersPermissionsUser
   attributes: {
     address: Schema.Attribute.Component<'chef-app.address', true>;
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    booking: Schema.Attribute.Relation<'oneToOne', 'api::booking.booking'>;
+    bookings: Schema.Attribute.Relation<'oneToMany', 'api::booking.booking'>;
     cart: Schema.Attribute.JSON;
     confirmationToken: Schema.Attribute.String & Schema.Attribute.Private;
     confirmed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
@@ -1079,6 +1126,10 @@ export interface PluginUsersPermissionsUser
       }>;
     provider: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
+    quote_request: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::quote-request.quote-request'
+    >;
     resetPasswordToken: Schema.Attribute.String & Schema.Attribute.Private;
     role: Schema.Attribute.Relation<
       'manyToOne',
@@ -1111,6 +1162,7 @@ declare module '@strapi/strapi' {
       'api::configuration.configuration': ApiConfigurationConfiguration;
       'api::cuisine.cuisine': ApiCuisineCuisine;
       'api::dish.dish': ApiDishDish;
+      'api::quote-request.quote-request': ApiQuoteRequestQuoteRequest;
       'api::review.review': ApiReviewReview;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

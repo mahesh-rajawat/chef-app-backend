@@ -93,6 +93,19 @@
     "longitude": {
       "type": "decimal",
       "required": false
+    },
+    "hourlyRate": {
+      "type": "decimal"
+    },
+    "acceptsCustomMenus": {
+      "type": "boolean",
+      "default": false
+    },
+    "quote_request": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::quote-request.quote-request",
+      "mappedBy": "chef"
     }
   }
 }

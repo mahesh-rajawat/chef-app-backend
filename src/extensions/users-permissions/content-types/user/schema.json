@@ -79,10 +79,16 @@
     "cart": {
       "type": "json"
     },
-    "booking": {
+    "bookings": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::booking.booking",
+      "mappedBy": "user"
+    },
+    "quote_request": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::booking.booking",
+      "target": "api::quote-request.quote-request",
       "mappedBy": "user"
     }
   }

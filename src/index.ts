@@ -72,10 +72,10 @@ export default {
                   root.id,
                   { populate: ['favoriteChefs'] }
                 );
-                // Return the array of chefs directly.
-                // Strapi's GraphQL plugin will automatically wrap this in the
-                // correct response collection structure for the client.
-                return fullUser.favoriteChefs;
+                console.log(fullUser);
+                return {
+                  nodes: fullUser.favoriteChefs
+                };
               },
             });
             // Add the addressBook component
