@@ -123,9 +123,9 @@
       "component": "chef-app.availability",
       "repeatable": true
     },
-    "booking": {
+    "bookings": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "oneToMany",
       "target": "api::booking.booking",
       "mappedBy": "chef"
     },

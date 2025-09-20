@@ -44,9 +44,9 @@
     },
     "chef": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "manyToOne",
       "target": "api::chef.chef",
-      "inversedBy": "booking"
+      "inversedBy": "bookings"
     },
     "user": {
       "type": "relation",

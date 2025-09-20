@@ -386,7 +386,7 @@ export interface ApiBookingBooking extends Struct.CollectionTypeSchema {
   attributes: {
     bookingDate: Schema.Attribute.Date & Schema.Attribute.Required;
     bookingTime: Schema.Attribute.String & Schema.Attribute.Required;
-    chef: Schema.Attribute.Relation<'oneToOne', 'api::chef.chef'>;
+    chef: Schema.Attribute.Relation<'manyToOne', 'api::chef.chef'>;
     comments: Schema.Attribute.Text;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -449,7 +449,7 @@ export interface ApiChefChef extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
-    booking: Schema.Attribute.Relation<'oneToOne', 'api::booking.booking'>;
+    bookings: Schema.Attribute.Relation<'oneToMany', 'api::booking.booking'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
