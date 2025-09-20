@@ -666,7 +666,7 @@ export interface ApiQuoteRequestQuoteRequest
     proposedFee: Schema.Attribute.Decimal;
     publishedAt: Schema.Attribute.DateTime;
     request_status: Schema.Attribute.Enumeration<
-      ['Pending', 'Accepted', 'Rejected']
+      ['Pending', 'Accepted', 'Rejected', 'Completed']
     > &
       Schema.Attribute.DefaultTo<'Pending'>;
     updatedAt: Schema.Attribute.DateTime;
