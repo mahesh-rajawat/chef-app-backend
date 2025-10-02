@@ -1,0 +1,133 @@
+[
+  {
+    "name": "Smoked Salmon Rye Bread",
+    "description": "Classic Finnish smoked salmon on dark rye bread with dill and lemon.",
+    "baseChefFee": 15,
+    "feePerPerson": 5,
+    "isFeatured": true,
+    "course": "Starter",
+    "cuisineName": "Finnish",
+    "chefName": "Jari Virtanen"
+  },
+  {
+    "name": "Reindeer Sauté",
+    "description": "Tender reindeer meat sautéed with mushrooms and onions, served with mashed potatoes and lingonberry jam.",
+    "baseChefFee": 35,
+    "feePerPerson": 15,
+    "isFeatured": true,
+    "course": "Main Course",
+    "cuisineName": "Finnish",
+    "chefName": "Jari Virtanen"
+  },
+  {
+    "name": "Handmade Pappardelle with Wild Boar Ragu",
+    "description": "Slow-cooked wild boar ragu served over fresh, handmade pappardelle pasta.",
+    "baseChefFee": 28,
+    "feePerPerson": 12,
+    "isFeatured": true,
+    "course": "Main Course",
+    "cuisineName": "Italian",
+    "chefName": "Liisa Korhonen"
+  },
+  {
+    "name": "Tiramisu Classico",
+    "description": "A classic Tiramisu made with authentic mascarpone, espresso-soaked ladyfingers, and a hint of marsala wine.",
+    "baseChefFee": 12,
+    "feePerPerson": 4,
+    "course": "Dessert",
+    "cuisineName": "Italian",
+    "chefName": "Liisa Korhonen"
+  },
+  {
+    "name": "Miso Glazed Black Cod",
+    "description": "Delicate black cod marinated in a sweet and savory miso glaze, broiled to perfection.",
+    "baseChefFee": 45,
+    "feePerPerson": 20,
+    "isFeatured": true,
+    "course": "Main Course",
+    "cuisineName": "Asian Fusion",
+    "chefName": "Tom Chen"
+  },
+  {
+    "name": "Spicy Tuna Crispy Rice",
+    "description": "Crispy fried rice blocks topped with spicy tuna tartare and a slice of jalapeño.",
+    "baseChefFee": 18,
+    "feePerPerson": 7,
+    "course": "Starter",
+    "cuisineName": "Asian Fusion",
+    "chefName": "Tom Chen"
+  },
+  {
+    "name": "Grilled Halloumi & Watermelon Salad",
+    "description": "A refreshing summer salad with grilled halloumi, fresh watermelon, mint, and a light vinaigrette.",
+    "baseChefFee": 14,
+    "feePerPerson": 6,
+    "course": "Starter",
+    "cuisineName": "Mediterranean",
+    "chefName": "Isabella Rossi"
+  },
+  {
+    "name": "Coq au Vin",
+    "description": "The quintessential French stew of chicken braised slowly in red wine, mushrooms, and garlic.",
+    "baseChefFee": 32,
+    "feePerPerson": 14,
+    "course": "Main Course",
+    "cuisineName": "French",
+    "chefName": "Mikael Lindström"
+  },
+  {
+    "name": "Crème Brûlée",
+    "description": "A rich custard base topped with a layer of hardened caramelized sugar.",
+    "baseChefFee": 11,
+    "feePerPerson": 4,
+    "course": "Dessert",
+    "cuisineName": "French",
+    "chefName": "Mikael Lindström"
+  },
+  {
+    "name": "Cochinita Pibil Tacos",
+    "description": "Slow-roasted pork marinated in citrus and achiote, served on fresh corn tortillas with pickled onions.",
+    "baseChefFee": 25,
+    "feePerPerson": 10,
+    "course": "Main Course",
+    "cuisineName": "Mexican",
+    "chefName": "Sofia Belmonte"
+  },
+  {
+    "name": "Lentil Shepherd's Pie",
+    "description": "A hearty and comforting vegan shepherd's pie with a rich lentil and vegetable filling, topped with creamy mashed potatoes.",
+    "baseChefFee": 22,
+    "feePerPerson": 9,
+    "course": "Main Course",
+    "cuisineName": "Vegan",
+    "chefName": "Antti Rantanen"
+  },
+  {
+    "name": "Quinoa Salad with Roasted Vegetables",
+    "description": "A vibrant and healthy salad with quinoa, roasted sweet potatoes, broccoli, and a lemon-tahini dressing.",
+    "baseChefFee": 16,
+    "feePerPerson": 7,
+    "course": "Main Course",
+    "cuisineName": "Healthy",
+    "chefName": "Elena Ivanova"
+  },
+  {
+    "name": "Butter Chicken (Murgh Makhani)",
+    "description": "Tender chicken cooked in a mildly spiced tomato sauce, rich with butter and cream.",
+    "baseChefFee": 26,
+    "feePerPerson": 11,
+    "course": "Main Course",
+    "cuisineName": "Indian",
+    "chefName": "Sanjay Kumar"
+  },
+  {
+    "name": "Chocolate Lava Cake",
+    "description": "A decadent chocolate cake with a gooey, molten chocolate center, served warm.",
+    "baseChefFee": 13,
+    "feePerPerson": 5,
+    "isFeatured": true,
+    "course": "Dessert",
+    "cuisineName": "Pastry",
+    "chefName": "Hanna Salo"
+  }
+]

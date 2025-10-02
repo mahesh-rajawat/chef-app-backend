@@ -532,6 +532,7 @@ export interface ApiChefChef extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    user: Schema.Attribute.Relation<'oneToOne', 'admin::user'>;
   };
 }
 
@@ -590,7 +591,9 @@ export interface ApiCuisineCuisine extends Struct.CollectionTypeSchema {
       'api::cuisine.cuisine'
     > &
       Schema.Attribute.Private;
-    name: Schema.Attribute.String & Schema.Attribute.Required;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -651,29 +654,40 @@ export interface ApiQuoteRequestQuoteRequest
     draftAndPublish: true;
   };
   attributes: {
+    address: Schema.Attribute.Text;
+    budget: Schema.Attribute.String;
     chef: Schema.Attribute.Relation<'oneToOne', 'api::chef.chef'>;
     chefResponse: Schema.Attribute.Blocks;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    cuisinePreference: Schema.Attribute.String;
+    dietaryRestrictions: Schema.Attribute.Text;
+    dishCount: Schema.Attribute.Integer;
+    eventDate: Schema.Attribute.Date;
     eventDetails: Schema.Attribute.Text;
+    eventTime: Schema.Attribute.Time;
+    eventType: Schema.Attribute.String & Schema.Attribute.Required;
+    guestCount: Schema.Attribute.Integer & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::quote-request.quote-request'
     > &
       Schema.Attribute.Private;
+    location: Schema.Attribute.String;
     proposedFee: Schema.Attribute.Decimal;
     publishedAt: Schema.Attribute.DateTime;
     request_status: Schema.Attribute.Enumeration<
       ['Pending', 'Accepted', 'Rejected', 'Completed']
     > &
       Schema.Attribute.DefaultTo<'Pending'>;
+    specialRequests: Schema.Attribute.Text;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     user: Schema.Attribute.Relation<
-      'oneToOne',
+      'manyToOne',
       'plugin::users-permissions.user'
     >;
   };
@@ -1196,8 +1210,8 @@ export interface PluginUsersPermissionsUser
       }>;
     provider: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    quote_request: Schema.Attribute.Relation<
-      'oneToOne',
+    quote_requests: Schema.Attribute.Relation<
+      'oneToMany',
       'api::quote-request.quote-request'
     >;
     resetPasswordToken: Schema.Attribute.String & Schema.Attribute.Private;

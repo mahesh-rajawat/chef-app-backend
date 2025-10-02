@@ -175,6 +175,11 @@
       "relation": "oneToOne",
       "target": "api::quote-request.quote-request",
       "mappedBy": "chef"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "admin::user"
     }
   }
 }

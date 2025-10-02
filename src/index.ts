@@ -1,3 +1,7 @@
+import { Core } from "@strapi/strapi";
+
+import {seed} from "../scripts/seed";
+
 const getDistance = (lat1, lon1, lat2, lon2) => {
   const R = 6371; // Radius of the Earth in km
   const dLat = (lat2 - lat1) * (Math.PI / 180);
@@ -114,6 +118,10 @@ export default {
           definition(t) {
             t.field('myBookings', {
               type: 'BookingEntityResponseCollection',
+              // args: {
+              //   filters: 'BookingFiltersInput',
+              //   sort: { type: 'list', of: 'String' },
+              // },
               description: "Returns the bookings of the currently authenticated user",
               async resolve(root, args, ctx) {
                 const user = ctx.state.user;
@@ -121,6 +129,10 @@ export default {
                 if (!user) {
                   return { nodes: [] };
                 }
+                // const whereClause = {
+                //   ...args.filters, // Spread any incoming filters (e.g., statusCode)
+                //   user: { id: user.id } // IMPORTANT: Always enforce this rule
+                // };
                 const bookings = await strapi.db.query('api::booking.booking').findMany({
                   where: { user: { id: user.id } },
                   populate: { 
@@ -207,5 +219,15 @@ export default {
    * This gives you an opportunity to set up your data model,
    * run jobs, or perform some special logic.
    */
-  bootstrap(/* { strapi }: { strapi: Core.Strapi } */) {},
+  async bootstrap({ strapi }: { strapi: Core.Strapi }) {
+    if (process.env.NODE_ENV === 'development') {
+      try {
+        console.log('Development environment detected, running seed script...');
+        // 3. Call your seed function and pass the strapi instance
+        await seed(strapi);
+      } catch (error) {
+        console.error('Could not run seed script:', error);
+      }
+    }
+  },
 };

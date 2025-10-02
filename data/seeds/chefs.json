@@ -1,0 +1,270 @@
+[
+  {
+    "name": "Jari Virtanen",
+    "rating": 4.9,
+    "reviewCount": 134,
+    "priceRange": "Premium",
+    "bio": [
+      {
+        "type": "paragraph",
+        "children": [
+          {
+            "type": "text",
+            "text": "A master of modern Finnish cuisine, Jari brings the flavors of the forest to your table. With 15 years of experience in Michelin-starred restaurants, he specializes in seasonal ingredients and elegant presentation."
+          }
+        ]
+      }
+    ],
+    "latitude": 60.1699,
+    "longitude": 24.9384,
+    "hourlyRate": 120,
+    "acceptsCustomMenus": true,
+    "availability": [
+      { "dayOfWeek": "Wednesday", "isAvailable": true, "timeSlots": ["18:00", "19:00", "20:00"] },
+      { "dayOfWeek": "Thursday", "isAvailable": true, "timeSlots": ["18:00", "19:00", "20:00"] },
+      { "dayOfWeek": "Friday", "isAvailable": true, "timeSlots": ["17:00", "18:00", "19:00", "20:00", "21:00"] },
+      { "dayOfWeek": "Saturday", "isAvailable": true, "timeSlots": ["17:00", "18:00", "19:00", "20:00", "21:00"] },
+      { "dayOfWeek": "Sunday", "isAvailable": true, "timeSlots": ["16:00", "17:00", "18:00"] }
+    ]
+  },
+  {
+    "name": "Liisa Korhonen",
+    "rating": 4.8,
+    "reviewCount": 98,
+    "priceRange": "Premium",
+    "bio": [
+      {
+        "type": "paragraph",
+        "children": [
+          {
+            "type": "text",
+            "text": "Specializing in authentic Italian pasta and rustic dishes, Liisa brings a piece of Tuscany to Finland. She learned her craft in Florence and is passionate about handmade pasta and simple, high-quality ingredients."
+          }
+        ]
+      }
+    ],
+    "latitude": 60.2055,
+    "longitude": 24.6559,
+    "hourlyRate": 95,
+    "acceptsCustomMenus": true,
+    "availability": [
+      { "dayOfWeek": "Tuesday", "isAvailable": true, "timeSlots": ["18:00", "19:00"] },
+      { "dayOfWeek": "Wednesday", "isAvailable": true, "timeSlots": ["18:00", "19:00"] },
+      { "dayOfWeek": "Thursday", "isAvailable": true, "timeSlots": ["18:00", "19:00"] },
+      { "dayOfWeek": "Friday", "isAvailable": true, "timeSlots": ["18:00", "19:00", "20:00"] },
+      { "dayOfWeek": "Saturday", "isAvailable": true, "timeSlots": ["18:00", "19:00", "20:00"] }
+    ]
+  },
+  {
+    "name": "Tom Chen",
+    "rating": 4.9,
+    "reviewCount": 152,
+    "priceRange": "Luxury",
+    "bio": [
+      {
+        "type": "paragraph",
+        "children": [
+          {
+            "type": "text",
+            "text": "An expert in Asian Fusion, Tom combines traditional techniques from Japan and China with a modern Nordic twist. He is renowned for his delicate sushi, flavorful dim sum, and creative plating."
+          }
+        ]
+      }
+    ],
+    "latitude": 60.1733,
+    "longitude": 24.9410,
+    "hourlyRate": 150,
+    "acceptsCustomMenus": true,
+    "availability": [
+        { "dayOfWeek": "Thursday", "isAvailable": true, "timeSlots": ["19:00", "20:00"] },
+        { "dayOfWeek": "Friday", "isAvailable": true, "timeSlots": ["19:00", "20:00", "21:00"] },
+        { "dayOfWeek": "Saturday", "isAvailable": true, "timeSlots": ["19:00", "20:00", "21:00"] }
+    ]
+  },
+  {
+    "name": "Isabella Rossi",
+    "rating": 4.7,
+    "reviewCount": 85,
+    "priceRange": "Standard",
+    "bio": [
+      {
+        "type": "paragraph",
+        "children": [
+          {
+            "type": "text",
+            "text": "Isabella is your go-to chef for vibrant Mediterranean and Middle Eastern feasts. She excels at creating colorful, shareable platters perfect for family gatherings and parties."
+          }
+        ]
+      }
+    ],
+    "latitude": 60.2242,
+    "longitude": 24.8169,
+    "hourlyRate": 75,
+    "acceptsCustomMenus": false,
+    "availability": [
+        { "dayOfWeek": "Monday", "isAvailable": true, "timeSlots": ["17:00", "18:00"] },
+        { "dayOfWeek": "Tuesday", "isAvailable": true, "timeSlots": ["17:00", "18:00"] },
+        { "dayOfWeek": "Wednesday", "isAvailable": true, "timeSlots": ["17:00", "18:00"] },
+        { "dayOfWeek": "Thursday", "isAvailable": true, "timeSlots": ["17:00", "18:00"] }
+    ]
+  },
+  {
+    "name": "Mikael Lindström",
+    "rating": 4.8,
+    "reviewCount": 110,
+    "priceRange": "Premium",
+    "bio": [
+      {
+        "type": "paragraph",
+        "children": [
+          {
+            "type": "text",
+            "text": "A specialist in French classical cuisine, Mikael offers a luxurious fine-dining experience. His precision and dedication to technique result in unforgettable dishes, from coq au vin to delicate soufflés."
+          }
+        ]
+      }
+    ],
+    "latitude": 60.1600,
+    "longitude": 24.9220,
+    "hourlyRate": 110,
+    "acceptsCustomMenus": true,
+    "availability": [
+        { "dayOfWeek": "Friday", "isAvailable": true, "timeSlots": ["18:00", "19:00", "20:00"] },
+        { "dayOfWeek": "Saturday", "isAvailable": true, "timeSlots": ["18:00", "19:00", "20:00"] }
+    ]
+  },
+  {
+    "name": "Sofia Belmonte",
+    "rating": 4.9,
+    "reviewCount": 180,
+    "priceRange": "Luxury",
+    "bio": [
+      {
+        "type": "paragraph",
+        "children": [
+          {
+            "type": "text",
+            "text": "With roots in Mexico City, Sofia creates authentic, high-end Mexican cuisine. Forget stereotypes; her food is complex, flavorful, and beautifully presented, focusing on moles, fresh salsas, and premium ingredients."
+          }
+        ]
+      }
+    ],
+    "latitude": 60.1575,
+    "longitude": 24.9440,
+    "hourlyRate": 140,
+    "acceptsCustomMenus": true,
+    "availability": [
+      { "dayOfWeek": "Wednesday", "isAvailable": true, "timeSlots": ["18:00", "19:00"] },
+      { "dayOfWeek": "Thursday", "isAvailable": true, "timeSlots": ["18:00", "19:00"] },
+      { "dayOfWeek": "Friday", "isAvailable": true, "timeSlots": ["18:00", "19:00", "20:00"] }
+    ]
+  },
+  {
+    "name": "Antti Rantanen",
+    "rating": 4.6,
+    "reviewCount": 72,
+    "priceRange": "Standard",
+    "bio": [
+      {
+        "type": "paragraph",
+        "children": [
+          {
+            "type": "text",
+            "text": "Antti is an expert in plant-based and vegan cuisine. He transforms vegetables into culinary masterpieces, proving that vegan food can be both comforting and gourmet."
+          }
+        ]
+      }
+    ],
+    "latitude": 60.2510,
+    "longitude": 25.0430,
+    "hourlyRate": 80,
+    "acceptsCustomMenus": true,
+    "availability": [
+      { "dayOfWeek": "Monday", "isAvailable": true, "timeSlots": ["17:00", "18:00", "19:00"] },
+      { "dayOfWeek": "Tuesday", "isAvailable": true, "timeSlots": ["17:00", "18:00", "19:00"] },
+      { "dayOfWeek": "Wednesday", "isAvailable": true, "timeSlots": ["17:00", "18:00", "19:00"] }
+    ]
+  },
+  {
+    "name": "Elena Ivanova",
+    "rating": 4.7,
+    "reviewCount": 95,
+    "priceRange": "Standard",
+    "bio": [
+      {
+        "type": "paragraph",
+        "children": [
+          {
+            "type": "text",
+            "text": "Elena focuses on healthy, nutritious, and delicious meals perfect for busy families and professionals. Her expertise lies in meal prep and creating balanced weekly menus."
+          }
+        ]
+      }
+    ],
+    "latitude": 60.1921,
+    "longitude": 24.9626,
+    "hourlyRate": 65,
+    "acceptsCustomMenus": false,
+    "availability": [
+      { "dayOfWeek": "Monday", "isAvailable": true, "timeSlots": ["09:00", "10:00", "11:00", "12:00"] },
+      { "dayOfWeek": "Tuesday", "isAvailable": true, "timeSlots": ["09:00", "10:00", "11:00", "12:00"] },
+      { "dayOfWeek": "Wednesday", "isAvailable": true, "timeSlots": ["09:00", "10:00", "11:00", "12:00"] },
+      { "dayOfWeek": "Thursday", "isAvailable": true, "timeSlots": ["09:00", "10:00", "11:00", "12:00"] },
+      { "dayOfWeek": "Friday", "isAvailable": true, "timeSlots": ["09:00", "10:00", "11:00", "12:00"] }
+    ]
+  },
+  {
+    "name": "Sanjay Kumar",
+    "rating": 4.9,
+    "reviewCount": 210,
+    "priceRange": "Premium",
+    "bio": [
+      {
+        "type": "paragraph",
+        "children": [
+          {
+            "type": "text",
+            "text": "Bringing the aromatic spices of Northern India to Helsinki, Sanjay is a master of tandoori, curries, and traditional Indian breads. He provides an authentic and unforgettable Indian dining experience."
+          }
+        ]
+      }
+    ],
+    "latitude": 60.1800,
+    "longitude": 24.9600,
+    "hourlyRate": 90,
+    "acceptsCustomMenus": true,
+    "availability": [
+      { "dayOfWeek": "Tuesday", "isAvailable": true, "timeSlots": ["18:00", "19:00", "20:00"] },
+      { "dayOfWeek": "Wednesday", "isAvailable": true, "timeSlots": ["18:00", "19:00", "20:00"] },
+      { "dayOfWeek": "Thursday", "isAvailable": true, "timeSlots": ["18:00", "19:00", "20:00"] },
+      { "dayOfWeek": "Friday", "isAvailable": true, "timeSlots": ["18:00", "19:00", "20:00"] },
+      { "dayOfWeek": "Saturday", "isAvailable": true, "timeSlots": ["18:00", "19:00", "20:00"] }
+    ]
+  },
+  {
+    "name": "Hanna Salo",
+    "rating": 4.8,
+    "reviewCount": 125,
+    "priceRange": "Luxury",
+    "bio": [
+      {
+        "type": "paragraph",
+        "children": [
+          {
+            "type": "text",
+            "text": "Hanna is a Cordon Bleu-trained pastry chef specializing in exquisite desserts, custom cakes, and high-end pastries. Perfect for adding a touch of sweetness to your special event."
+          }
+        ]
+      }
+    ],
+    "latitude": 60.1675,
+    "longitude": 24.9510,
+    "hourlyRate": 130,
+    "acceptsCustomMenus": true,
+    "availability": [
+        { "dayOfWeek": "Friday", "isAvailable": true, "timeSlots": ["14:00", "15:00", "16:00"] },
+        { "dayOfWeek": "Saturday", "isAvailable": true, "timeSlots": ["12:00", "13:00", "14:00", "15:00", "16:00"] },
+        { "dayOfWeek": "Sunday", "isAvailable": true, "timeSlots": ["12:00", "13:00", "14:00"] }
+    ]
+  }
+]

@@ -26,9 +26,9 @@
     },
     "user": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
-      "inversedBy": "quote_request"
+      "inversedBy": "quote_requests"
     },
     "chef": {
       "type": "relation",
@@ -41,6 +41,42 @@
     },
     "proposedFee": {
       "type": "decimal"
+    },
+    "eventType": {
+      "type": "string",
+      "required": true
+    },
+    "eventDate": {
+      "type": "date"
+    },
+    "eventTime": {
+      "type": "time"
+    },
+    "guestCount": {
+      "type": "integer",
+      "required": true
+    },
+    "location": {
+      "type": "string",
+      "required": false
+    },
+    "address": {
+      "type": "text"
+    },
+    "dishCount": {
+      "type": "integer"
+    },
+    "cuisinePreference": {
+      "type": "string"
+    },
+    "dietaryRestrictions": {
+      "type": "text"
+    },
+    "budget": {
+      "type": "string"
+    },
+    "specialRequests": {
+      "type": "text"
     }
   }
 }

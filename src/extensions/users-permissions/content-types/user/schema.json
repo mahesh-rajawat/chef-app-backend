@@ -85,9 +85,9 @@
       "target": "api::booking.booking",
       "mappedBy": "user"
     },
-    "quote_request": {
+    "quote_requests": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "oneToMany",
       "target": "api::quote-request.quote-request",
       "mappedBy": "user"
     }
