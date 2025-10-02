@@ -1,6 +1,6 @@
 import { Core } from "@strapi/strapi";
 
-import {seed} from "../scripts/seed";
+// import {seed} from "../scripts/seed";
 
 const getDistance = (lat1, lon1, lat2, lon2) => {
   const R = 6371; // Radius of the Earth in km
@@ -220,14 +220,14 @@ export default {
    * run jobs, or perform some special logic.
    */
   async bootstrap({ strapi }: { strapi: Core.Strapi }) {
-    if (process.env.NODE_ENV === 'development') {
-      try {
-        console.log('Development environment detected, running seed script...');
-        // 3. Call your seed function and pass the strapi instance
-        await seed(strapi);
-      } catch (error) {
-        console.error('Could not run seed script:', error);
-      }
-    }
+    // if (process.env.NODE_ENV === 'development') {
+    //   try {
+    //     console.log('Development environment detected, running seed script...');
+    //     // 3. Call your seed function and pass the strapi instance
+    //     await seed(strapi);
+    //   } catch (error) {
+    //     console.error('Could not run seed script:', error);
+    //   }
+    // }
   },
 };
