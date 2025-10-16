@@ -385,6 +385,12 @@ export interface ApiBookingBooking extends Struct.CollectionTypeSchema {
   };
   attributes: {
     bookingDate: Schema.Attribute.Date & Schema.Attribute.Required;
+    bookingId: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 10;
+      }>;
     bookingTime: Schema.Attribute.String & Schema.Attribute.Required;
     chef: Schema.Attribute.Relation<'manyToOne', 'api::chef.chef'>;
     comments: Schema.Attribute.Text;

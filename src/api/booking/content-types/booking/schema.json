@@ -53,6 +53,12 @@
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "bookings"
+    },
+    "bookingId": {
+      "type": "string",
+      "maxLength": 10,
+      "required": true,
+      "unique": true
     }
   }
 }
