@@ -33,7 +33,8 @@
         "Confirmed",
         "Complete",
         "Cancelled",
-        "Pending"
+        "Pending",
+        "Processing"
       ]
     },
     "comments": {

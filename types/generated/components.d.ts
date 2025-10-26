@@ -1,18 +1,5 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
-export interface ChefAppAddress extends Struct.ComponentSchema {
-  collectionName: 'components_chef_app_addresses';
-  info: {
-    displayName: 'address';
-  };
-  attributes: {
-    city: Schema.Attribute.String & Schema.Attribute.Required;
-    label: Schema.Attribute.String;
-    postalCode: Schema.Attribute.String & Schema.Attribute.Required;
-    street: Schema.Attribute.String & Schema.Attribute.Required;
-  };
-}
-
 export interface ChefAppAvailability extends Struct.ComponentSchema {
   collectionName: 'components_chef_app_availabilities';
   info: {
@@ -74,7 +61,6 @@ export interface ChefAppWeeklySchedule extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
-      'chef-app.address': ChefAppAddress;
       'chef-app.availability': ChefAppAvailability;
       'chef-app.ingredient': ChefAppIngredient;
       'chef-app.nutrition': ChefAppNutrition;

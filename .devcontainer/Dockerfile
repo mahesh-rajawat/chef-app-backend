@@ -1,5 +1,5 @@
 # Use a standard Node.js image for Strapi
-FROM node:18-alpine
+FROM node:22-alpine
 
 # Set the working directory
 WORKDIR /workspace

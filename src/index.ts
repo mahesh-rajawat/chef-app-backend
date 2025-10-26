@@ -1,85 +1,141 @@
-import { Core } from "@strapi/strapi";
-import chefGraphqlExtension from './api/chef/graphql';
+// src/index.ts
 
+// @ts-ignore
+import chefGraphqlExtension from './api/chef/graphql';
+// @ts-ignore
+import { seed } from '../scripts/seed';
 
 export default {
   /**
    * An asynchronous register function that runs before
    * your application is initialized.
-   *
-   * This gives you an opportunity to extend code.
    */
-  register({ strapi }) {
+  register({ strapi }: { strapi: any }) {
     const extensionService = strapi.plugin('graphql').service('extension');
-    extensionService.use(chefGraphqlExtension);
+
     extensionService.use(({ nexus }) => ({
       types: [
         nexus.extendType({
           type: 'Chef',
-          definition(t) {
+          definition(t: any) {
+            // This ensures the documentId from the old API still works
             t.id('id');
           },
         }),
         nexus.extendType({
-          type: 'UsersPermissionsMe',
-          definition(t) {
-            // Add the favoriteChefs relation
-            t.field('favoriteChefs', {
-              type: 'ChefRelationResponseCollection',
-              description: 'User favorite chefs',
-              async resolve(root, args, ctx) {
-                const fullUser = await strapi.entityService.findOne(
-                  'plugin::users-permissions.user',
-                  root.id,
-                  { populate: ['favoriteChefs'] }
+          type: 'Address',
+          definition(t: any) {
+            t.id('id');
+          },
+        }),
+        nexus.extendType({
+          type: 'UsersPermissionsUser',
+          definition(t: any) {
+            t.id('id');
+          },
+        }),
+        
+        nexus.extendType({
+          type: 'Query',
+          definition(t: any) {
+            t.field('me', {
+              type: 'UsersPermissionsMe',
+              async resolve(parent: any, args: any, ctx: any) {
+                if (!ctx.state.user) {
+                  return null;
+                }
+                // Fetch the user ONCE, and populate all relations.
+                // This is the single source of truth.
+                const user = await strapi.entityService.findOne(
+                  'plugin::users-permissions.user', 
+                  ctx.state.user.id, 
+                  { populate: ['addresses', 'favoriteChefs'] } 
                 );
+
+                // Manually format relations to match GraphQL { data, meta } structure
+                // This is the key to preventing the "cannot return null" errors
                 return {
-                  nodes: fullUser.favoriteChefs
+                  ...user,
+                  addresses: {
+                    nodes: user.addresses || []
+                  },
+                  favoriteChefs: {
+                    nodes: user.favoriteChefs || [],
+                    meta: { pagination: { total: (user.favoriteChefs || []).length } }
+                  }
                 };
-              },
+              }
             });
-            // Add the addressBook component
-            t.list.field('addressBook', {
-              type: 'ComponentChefAppAddress',
-              description: 'User address book',
+          }
+        }),
+        // 2. Extend the User *output* type
+        nexus.extendType({
+          type: 'UsersPermissionsMe',
+          definition(t: any) {
+            t.id('id');
+            t.string('username');
+            t.string('email');
+            
+            t.string('phone');
+            t.boolean('pushNotifications');
+            t.boolean('emailNotifications');
+            t.string('pushToken');
+            t.field('cart', { type: 'JSON' });
+            t.field('addresses', {
+              type: 'AddressEntityResponseCollection',
+              description: 'User address book collection',
+              resolve: (parent: any) => parent.addresses,
             });
-            t.field('cart', {
-              type: 'JSON',
-              description: 'User shopping cart',
+            
+            t.field('favoriteChefs', {
+              type: 'ChefEntityResponseCollection',
+              description: 'User favorite chefs',
+              resolve: (parent: any) => parent.favoriteChefs,
             });
           },
         }),
-        nexus.extendInputType({
+        
+        nexus.extendType({
           type: 'UsersPermissionsUserInput',
-          definition(t) {
-            // This tells the mutation to accept a 'cart' field of type JSON
-            t.field('cart', {
-              type: 'JSON',
+          definition(t: any) {
+            t.string('phone');
+            t.boolean('pushNotifications');
+            t.boolean('emailNotifications');
+            t.string('pushToken');
+            
+            t.field('cart', { type: 'JSON' });
+
+            t.list.field('address', {
+              type: 'ComponentChefAppAddressInput',
             });
           },
         }),
-        nexus.extendInputType({
-          type: 'UsersPermissionsUserFiltersInput',
-          definition(t) {
-            t.field('id', { type: 'IDFilterInput' });
+        
+        nexus.objectType({
+          name: 'ComponentChefAppAddress',
+          definition(t: any) {
+            t.id('id');
+            t.string('name');
+            t.string('label');
+            t.string('street');
+            t.string('city');
+            t.string('postalCode');
           },
         }),
       ],
     }));
+
+    extensionService.use(chefGraphqlExtension);
   },
 
   /**
    * An asynchronous bootstrap function that runs before
    * your application gets started.
-   *
-   * This gives you an opportunity to set up your data model,
-   * run jobs, or perform some special logic.
    */
-  async bootstrap({ strapi }: { strapi: Core.Strapi }) {
+  async bootstrap({ strapi }: { strapi: any }) {
     // if (process.env.NODE_ENV === 'development') {
     //   try {
     //     console.log('Development environment detected, running seed script...');
-    //     // 3. Call your seed function and pass the strapi instance
     //     await seed(strapi);
     //   } catch (error) {
     //     console.error('Could not run seed script:', error);
@@ -87,3 +143,4 @@ export default {
     // }
   },
 };
+
