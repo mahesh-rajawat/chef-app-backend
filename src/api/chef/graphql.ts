@@ -1,6 +1,7 @@
 // src/api/chef/graphql.ts
 
 import { convertGqlFiltersToDbFilters } from '../../../src/utils/filters';
+import { findBestActiveRule } from '../../utils/discountCalculation';
 
 const getDistance = (lat1, lon1, lat2, lon2) => {
   const R = 6371; // Radius of the Earth in km
@@ -46,6 +47,29 @@ export default ({ nexus }: { nexus: any }) => ({
         t.list.field('nodes', { type: 'Chef' });
         t.field('pageInfo', { type: 'CustomPageInfo' });
       },
+    }),
+
+    nexus.extendType({
+      type: 'Chef',
+      definition(t: any) {
+        // This field provides discount info
+        t.boolean('hasActiveDiscount', {
+          description: 'Whether the chef has any active discounts right now',
+          async resolve(chef: any) {
+            console.log(chef);
+            const idToUse = chef.documentId || chef.id;
+            if (!idToUse) return false;
+            const bestRule = await findBestActiveRule(strapi, idToUse);
+            return !!bestRule;
+          }
+        });
+
+        // Expose the 'isVerified' field
+        t.boolean('isVerified', {
+          description: 'Whether the chef has a clear criminal history check',
+          resolve: (chef: any) => chef.isVerified,
+        });
+      }
     }),
     
     nexus.extendType({

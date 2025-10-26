@@ -434,6 +434,9 @@ export interface ApiBookingBooking extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     dishes: Schema.Attribute.JSON;
+    groceryFeeApplied: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
+    groceryServiceFee: Schema.Attribute.Decimal;
     guestCount: Schema.Attribute.Integer & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -514,6 +517,14 @@ export interface ApiChefChef extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    isVerified: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
+      Schema.Attribute.DefaultTo<false>;
     latitude: Schema.Attribute.Decimal &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
