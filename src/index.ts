@@ -2,8 +2,10 @@
 
 // @ts-ignore
 import chefGraphqlExtension from './api/chef/graphql';
+import dishGraphqlExtension from './api/dish/graphql/extension'; 
 // @ts-ignore
 import { seed } from '../scripts/seed';
+import { findBestActiveRule } from './utils/discountCalculation';
 
 export default {
   /**
@@ -12,6 +14,7 @@ export default {
    */
   register({ strapi }: { strapi: any }) {
     const extensionService = strapi.plugin('graphql').service('extension');
+    extensionService.use(dishGraphqlExtension);
 
     extensionService.use(({ nexus }) => ({
       types: [
@@ -34,7 +37,20 @@ export default {
             t.id('id');
           },
         }),
-        
+        nexus.extendType({
+          type: 'Chef',
+          definition(t: any) {
+            t.boolean('hasActiveDiscount', {
+              description: 'Whether the chef has any active discounts right now',
+              async resolve(chef: any) {
+                console.log("strapi index", chef);
+                const bestRule = await findBestActiveRule(strapi, chef.documentId);
+                console.log("strapi index", bestRule);
+                return !!bestRule; // Return true if a rule exists, false otherwise
+              }
+            });
+          }
+        }),
         nexus.extendType({
           type: 'Query',
           definition(t: any) {

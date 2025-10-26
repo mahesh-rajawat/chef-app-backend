@@ -544,6 +544,10 @@ export interface ApiChefChef extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    price_rules: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::price-rule.price-rule'
+    >;
     priceRange: Schema.Attribute.Enumeration<
       ['Budget', 'Standard', 'Premium', 'Luxury']
     > &
@@ -678,6 +682,41 @@ export interface ApiDishDish extends Struct.CollectionTypeSchema {
     reviewCount: Schema.Attribute.Integer;
     reviews: Schema.Attribute.Relation<'oneToMany', 'api::review.review'>;
     tags: Schema.Attribute.Text;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiPriceRulePriceRule extends Struct.CollectionTypeSchema {
+  collectionName: 'price_rules';
+  info: {
+    displayName: 'PriceRule';
+    pluralName: 'price-rules';
+    singularName: 'price-rule';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    chefs: Schema.Attribute.Relation<'manyToMany', 'api::chef.chef'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    discountAmount: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    discountType: Schema.Attribute.Enumeration<['Fixed', 'Percentage']> &
+      Schema.Attribute.Required;
+    endDate: Schema.Attribute.DateTime;
+    isEnabled: Schema.Attribute.Boolean;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::price-rule.price-rule'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    startDate: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1293,6 +1332,7 @@ declare module '@strapi/strapi' {
       'api::configuration.configuration': ApiConfigurationConfiguration;
       'api::cuisine.cuisine': ApiCuisineCuisine;
       'api::dish.dish': ApiDishDish;
+      'api::price-rule.price-rule': ApiPriceRulePriceRule;
       'api::quote-request.quote-request': ApiQuoteRequestQuoteRequest;
       'api::review.review': ApiReviewReview;
       'plugin::content-releases.release': PluginContentReleasesRelease;

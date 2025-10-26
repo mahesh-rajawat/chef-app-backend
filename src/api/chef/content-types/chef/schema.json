@@ -180,6 +180,12 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "admin::user"
+    },
+    "price_rules": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::price-rule.price-rule",
+      "mappedBy": "chefs"
     }
   }
 }

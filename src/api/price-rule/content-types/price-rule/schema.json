@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "price_rules",
+  "info": {
+    "singularName": "price-rule",
+    "pluralName": "price-rules",
+    "displayName": "PriceRule"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "isEnabled": {
+      "type": "boolean"
+    },
+    "discountType": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "Fixed",
+        "Percentage"
+      ]
+    },
+    "discountAmount": {
+      "type": "decimal",
+      "required": true
+    },
+    "startDate": {
+      "type": "datetime"
+    },
+    "endDate": {
+      "type": "datetime"
+    },
+    "chefs": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::chef.chef",
+      "inversedBy": "price_rules"
+    }
+  }
+}
