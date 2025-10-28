@@ -36,6 +36,20 @@ export interface ChefAppNutrition extends Struct.ComponentSchema {
   };
 }
 
+export interface ChefAppVerificationChecks extends Struct.ComponentSchema {
+  collectionName: 'components_chef_app_verification_checks';
+  info: {
+    displayName: 'Verification Checks';
+  };
+  attributes: {
+    backgroundCheck: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
+    foodSafety: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    identity: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    insurance: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+  };
+}
+
 export interface ChefAppWeeklySchedule extends Struct.ComponentSchema {
   collectionName: 'components_chef_app_weekly_schedules';
   info: {
@@ -64,6 +78,7 @@ declare module '@strapi/strapi' {
       'chef-app.availability': ChefAppAvailability;
       'chef-app.ingredient': ChefAppIngredient;
       'chef-app.nutrition': ChefAppNutrition;
+      'chef-app.verification-checks': ChefAppVerificationChecks;
       'chef-app.weekly-schedule': ChefAppWeeklySchedule;
     }
   }

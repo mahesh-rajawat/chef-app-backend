@@ -147,6 +147,12 @@ export default {
         //     t.string('postalCode');
         //   },
         // }),
+        nexus.extendInputType({
+          type: 'UsersPermissionsUserFiltersInput',
+          definition(t: any) {
+            t.field('id', { type: 'IDFilterInput' });
+          },
+        }),
       ],
     }));
 

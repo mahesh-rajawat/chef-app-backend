@@ -196,6 +196,16 @@
       },
       "required": true,
       "default": false
+    },
+    "verifications": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "chef-app.verification-checks",
+      "repeatable": false
     }
   }
 }

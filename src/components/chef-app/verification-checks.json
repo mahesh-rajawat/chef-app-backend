@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_chef_app_verification_checks",
+  "info": {
+    "displayName": "Verification Checks"
+  },
+  "options": {},
+  "attributes": {
+    "backgroundCheck": {
+      "type": "boolean",
+      "default": false
+    },
+    "foodSafety": {
+      "type": "boolean",
+      "default": false
+    },
+    "insurance": {
+      "type": "boolean",
+      "default": false
+    },
+    "identity": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "config": {}
+}

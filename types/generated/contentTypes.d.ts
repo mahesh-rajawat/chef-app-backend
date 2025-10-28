@@ -590,6 +590,15 @@ export interface ApiChefChef extends Struct.CollectionTypeSchema {
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     user: Schema.Attribute.Relation<'oneToOne', 'admin::user'>;
+    verifications: Schema.Attribute.Component<
+      'chef-app.verification-checks',
+      false
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
   };
 }
 
