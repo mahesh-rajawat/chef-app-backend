@@ -18,6 +18,7 @@
     "@strapi/plugin-cloud": "5.22.0",
     "@strapi/plugin-graphql": "^5.23.0",
     "@strapi/plugin-users-permissions": "5.22.0",
+    "@strapi/provider-upload-cloudinary": "^5.29.0",
     "@strapi/strapi": "5.22.0",
     "better-sqlite3": "11.3.0",
     "crypto": "^1.0.1",

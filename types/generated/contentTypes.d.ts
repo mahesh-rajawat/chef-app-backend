@@ -433,10 +433,14 @@ export interface ApiBookingBooking extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    deliveryAddress: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::address.address'
+    >;
     dishes: Schema.Attribute.JSON;
     groceryFeeApplied: Schema.Attribute.Boolean &
       Schema.Attribute.DefaultTo<false>;
-    groceryServiceFee: Schema.Attribute.Decimal;
+    groceryServiceFee: Schema.Attribute.Decimal & Schema.Attribute.DefaultTo<0>;
     guestCount: Schema.Attribute.Integer & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -444,6 +448,7 @@ export interface ApiBookingBooking extends Struct.CollectionTypeSchema {
       'api::booking.booking'
     > &
       Schema.Attribute.Private;
+    paymentTransactionId: Schema.Attribute.String & Schema.Attribute.Unique;
     publishedAt: Schema.Attribute.DateTime;
     statusCode: Schema.Attribute.Enumeration<
       ['Confirmed', 'Complete', 'Cancelled', 'Pending', 'Processing']

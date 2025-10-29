@@ -45,17 +45,15 @@ export default ({ nexus, strapi }: { nexus: any, strapi: any }) => ({
             const user = ctx.state.user;
 
             if (!user) {
-              // This should not be reachable if the query is protected, but as a safeguard:
               return { nodes: [], pageInfo: { total: 0, page: 1, pageSize: 0, pageCount: 0 } };
             }
 
             const sortString = (sort && sort[0]) || 'bookingDate:desc';
             const gqlFilters = convertGqlFiltersToDbFilters(filters);
             
-            // --- CRITICAL: Merge incoming filters with a non-negotiable user filter ---
             const finalFilters = {
               ...gqlFilters,
-              user: { id: { $eq: user.id } } // This ensures a user can ONLY see their own bookings
+              user: { id: { $eq: user.id } } 
             };
 
             const { results, pagination: resultPagination } = await (strapi as any).service('api::booking.booking').find({
@@ -65,10 +63,11 @@ export default ({ nexus, strapi }: { nexus: any, strapi: any }) => ({
               populate: { 
                 chef: {
                   populate: { imageUrl: true }
-                }
+                },
+                deliveryAddress: true,
               },
             });
-
+            console.log(results);
             return {
               nodes: results,
               pageInfo: resultPagination,

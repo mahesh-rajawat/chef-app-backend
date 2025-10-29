@@ -66,7 +66,17 @@
       "default": false
     },
     "groceryServiceFee": {
-      "type": "decimal"
+      "type": "decimal",
+      "default": 0
+    },
+    "deliveryAddress": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::address.address"
+    },
+    "paymentTransactionId": {
+      "type": "string",
+      "unique": true
     }
   }
 }
