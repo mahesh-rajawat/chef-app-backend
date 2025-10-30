@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_chef_app_discussion_entries",
+  "info": {
+    "displayName": "DiscussionEntry"
+  },
+  "options": {},
+  "attributes": {
+    "author": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "Customer",
+        "ChefLink Team"
+      ]
+    },
+    "message": {
+      "type": "text",
+      "required": true
+    },
+    "timestamp": {
+      "type": "datetime"
+    }
+  },
+  "config": {}
+}
