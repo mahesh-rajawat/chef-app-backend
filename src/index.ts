@@ -8,6 +8,7 @@ import { seed } from '../scripts/seed';
 import { findBestActiveRule } from './utils/discountCalculation';
 import bookingGraphqlExtension from './api/booking/graphql'; 
 import userGraphqlExtension from './extensions/user.graphql';
+import quoteGraphqlExtension from './api/quote-request/graphql/extension';
 
 export default {
   /**
@@ -19,6 +20,7 @@ export default {
     extensionService.use(chefGraphqlExtension);
     extensionService.use(dishGraphqlExtension);
     extensionService.use(bookingGraphqlExtension);
+    extensionService.use(quoteGraphqlExtension);
     extensionService.use(userGraphqlExtension);
 
     extensionService.use(({ nexus }) => ({

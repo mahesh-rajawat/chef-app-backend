@@ -10,6 +10,19 @@ export interface ChefAppAvailability extends Struct.ComponentSchema {
   };
 }
 
+export interface ChefAppDiscussionEntry extends Struct.ComponentSchema {
+  collectionName: 'components_chef_app_discussion_entries';
+  info: {
+    displayName: 'DiscussionEntry';
+  };
+  attributes: {
+    author: Schema.Attribute.Enumeration<['Customer', 'ChefLink Team']> &
+      Schema.Attribute.Required;
+    message: Schema.Attribute.Text & Schema.Attribute.Required;
+    timestamp: Schema.Attribute.DateTime;
+  };
+}
+
 export interface ChefAppIngredient extends Struct.ComponentSchema {
   collectionName: 'components_chef_app_ingredients';
   info: {
@@ -76,6 +89,7 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'chef-app.availability': ChefAppAvailability;
+      'chef-app.discussion-entry': ChefAppDiscussionEntry;
       'chef-app.ingredient': ChefAppIngredient;
       'chef-app.nutrition': ChefAppNutrition;
       'chef-app.verification-checks': ChefAppVerificationChecks;

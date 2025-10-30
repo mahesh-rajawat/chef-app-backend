@@ -769,6 +769,7 @@ export interface ApiQuoteRequestQuoteRequest
       Schema.Attribute.Private;
     cuisinePreference: Schema.Attribute.String;
     dietaryRestrictions: Schema.Attribute.Text;
+    discussion: Schema.Attribute.Component<'chef-app.discussion-entry', true>;
     dishCount: Schema.Attribute.Integer;
     eventDate: Schema.Attribute.Date;
     eventDetails: Schema.Attribute.Text;
@@ -785,7 +786,7 @@ export interface ApiQuoteRequestQuoteRequest
     proposedFee: Schema.Attribute.Decimal;
     publishedAt: Schema.Attribute.DateTime;
     request_status: Schema.Attribute.Enumeration<
-      ['Pending', 'Accepted', 'Rejected', 'Completed']
+      ['Pending', 'Quoted', 'Accepted', 'Rejected', 'Completed']
     > &
       Schema.Attribute.DefaultTo<'Pending'>;
     specialRequests: Schema.Attribute.Text;

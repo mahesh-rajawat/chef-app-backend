@@ -19,6 +19,7 @@
       "default": "Pending",
       "enum": [
         "Pending",
+        "Quoted",
         "Accepted",
         "Rejected",
         "Completed"
@@ -77,6 +78,11 @@
     },
     "specialRequests": {
       "type": "text"
+    },
+    "discussion": {
+      "type": "component",
+      "component": "chef-app.discussion-entry",
+      "repeatable": true
     }
   }
 }

@@ -14,16 +14,12 @@ export default ({ nexus, strapi }: { nexus: any, strapi: any }) => ({
 						if (!ctx.state.user) {
 							return null;
 						}
-						// Fetch the user ONCE, and populate all relations.
-						// This is the single source of truth.
 						const user = await strapi.entityService.findOne(
 							'plugin::users-permissions.user', 
 							ctx.state.user.id, 
 							{ populate: ['addresses', 'favoriteChefs'] } 
 						);
 
-						// Manually format relations to match GraphQL { data, meta } structure
-						// This is the key to preventing the "cannot return null" errors
 						return {
 							...user,
 							addresses: {

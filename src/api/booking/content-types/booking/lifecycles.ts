@@ -37,6 +37,48 @@ async function sendExpoPushNotification(pushToken: string, title: string, body: 
 
 
 export default {
+  /**
+   * Runs AFTER a new booking is created.
+   * This is where we send the confirmation email.
+   */
+  async afterCreate(event: { result: any }) {
+    const { result } = event; // 'result' is the newly created booking
+
+    try {
+      // Find the booking and populate all the data we need for the email
+      const booking = await (strapi as any).entityService.findOne('api::booking.booking', result.id, {
+        populate: { user: true, chef: true, deliveryAddress: true },
+      });
+
+      if (booking && booking.user) {
+        const pushToken = booking.user?.pushToken;
+        await sendExpoPushNotification(pushToken, 'Booking Confirmation', 'You booked the chef successfully', { bookingId: result.documentId });
+        // await (strapi as any).plugin('email').service('email').send({
+        //   to: booking.user.email,
+        //   from: 'support@cheflink.app', // Must be a verified sender in SendGrid
+        //   subject: `Your ChefLink Booking is Confirmed! (#${booking.bookingId})`,
+        //   html: `
+        //     <h1>Your Booking is Confirmed!</h1>
+        //     <p>Hi ${booking.user.username},</p>
+        //     <p>Thank you for booking with ChefLink. Your booking with <strong>${booking.chef.name}</strong> is confirmed.</p>
+        //     <hr>
+        //     <h3>Details:</h3>
+        //     <ul>
+        //       <li><strong>Booking ID:</strong> #${booking.bookingId}</li>
+        //       <li><strong>Date:</strong> ${new Date(booking.bookingDate).toLocaleDateString()}</li>
+        //       <li><strong>Time:</strong> ${booking.bookingTime}</li>
+        //       <li><strong>Address:</strong> ${booking.deliveryAddress.street}, ${booking.deliveryAddress.city}</li>
+        //       <li><strong>Total Paid:</strong> €${booking.totalFee.toFixed(2)}</li>
+        //     </ul>
+        //     <p>We look forward to serving you!</p>
+        //     <p>- The ChefLink Team</p>
+        //   `,
+        // });
+      }
+    } catch (err) {
+      console.error('Error sending booking confirmation email:', err);
+    }
+  },
   async beforeCreate(event: { params: { data: any } }) {
     const { data } = event.params;
 
@@ -53,7 +95,6 @@ export default {
       nextId = lastId + 1;
     }
 
-    // Pad the number with leading zeros to make it 8 digits long (e.g., 00000001)
     data.bookingId = String(nextId).padStart(8, '0');
   },
 
