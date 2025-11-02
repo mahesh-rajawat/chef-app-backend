@@ -17,4 +17,11 @@ module.exports = ({ env }) => ({
       },
     },
   },
+  graphql: {
+    config: {
+      apolloServer: {
+        introspection: true,
+      },
+    },
+  },
 });
