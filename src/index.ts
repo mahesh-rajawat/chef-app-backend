@@ -28,7 +28,6 @@ export default {
         nexus.extendType({
           type: 'Chef',
           definition(t: any) {
-            // This ensures the documentId from the old API still works
             t.id('id');
           },
         }),

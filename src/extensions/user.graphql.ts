@@ -17,7 +17,7 @@ export default ({ nexus, strapi }: { nexus: any, strapi: any }) => ({
 						const user = await strapi.entityService.findOne(
 							'plugin::users-permissions.user', 
 							ctx.state.user.id, 
-							{ populate: ['addresses', 'favoriteChefs'] } 
+							{ populate: ['favoriteChefs', 'addresses'] } 
 						);
 
 						return {
@@ -57,6 +57,16 @@ export default ({ nexus, strapi }: { nexus: any, strapi: any }) => ({
 						type: 'ChefEntityResponseCollection',
 						description: 'User favorite chefs',
 						resolve: (parent: any) => parent.favoriteChefs,
+					});
+					t.field('chef', {
+						type: 'Chef', 
+						description: 'The chef profile linked to this user',
+						async resolve(parent: any) {
+							const chef = await strapi.db.query('api::chef.chef').findOne({
+							where: { user: parent.id },
+							});
+							return chef;
+						},
 					});
 				},
 			}),

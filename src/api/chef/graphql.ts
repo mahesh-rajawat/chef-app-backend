@@ -1,25 +1,10 @@
 // src/api/chef/graphql.ts
 
-import { convertGqlFiltersToDbFilters } from '../../../src/utils/filters';
+// Make sure this path is correct for your project
 import { findBestActiveRule } from '../../utils/discountCalculation';
+import { getDistance } from '../../utils/location';
+import { convertGqlFiltersToDbFilters } from '../../utils/filters';
 
-const getDistance = (lat1, lon1, lat2, lon2) => {
-  const R = 6371; // Radius of the Earth in km
-  const dLat = (lat2 - lat1) * (Math.PI / 180);
-  const dLon = (lon2 - lon1) * (Math.PI / 180);
-  const a =
-    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos(lat1 * (Math.PI / 180)) *
-      Math.cos(lat2 * (Math.PI / 180)) *
-      Math.sin(dLon / 2) *
-      Math.sin(dLon / 2);
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  const distance = R * c; // Distance in km
-  return distance;
-};
-
-
-// --- THE FIX: Use a simpler, more generic interface that doesn't rely on generated types ---
 interface ResolverArgs {
   latitude?: number | null;
   longitude?: number | null;
@@ -28,9 +13,8 @@ interface ResolverArgs {
   sort?: string[] | null;
   pagination?: { start?: number; limit?: number; page?: number; pageSize?: number; } | null;
 }
-// -----------------------------------------------------------------------------------------
 
-export default ({ nexus }: { nexus: any }) => ({
+export default ({ nexus, strapi }: { nexus: any, strapi: any }) => ({
   types: [
     nexus.objectType({
       name: 'CustomPageInfo',
@@ -48,15 +32,108 @@ export default ({ nexus }: { nexus: any }) => ({
         t.field('pageInfo', { type: 'CustomPageInfo' });
       },
     }),
+    
+    // --- Define the response type for Chef Registration ---
+    nexus.objectType({
+      name: 'ChefRegisterPayload',
+      definition(t: any) {
+        t.string('jwt');
+        t.field('user', { type: 'UsersPermissionsMe' });
+        t.field('chef', { type: 'Chef' });
+      },
+    }),
+
+    // --- Extend Mutation to add registerChef ---
+    nexus.extendType({
+      type: 'Mutation',
+      definition(t: any) {
+        t.field('registerChef', {
+          type: 'ChefRegisterPayload',
+          args: {
+            // Required basic info
+            username: nexus.nonNull(nexus.stringArg()),
+            email: nexus.nonNull(nexus.stringArg()),
+            password: nexus.nonNull(nexus.stringArg()),
+            name: nexus.nonNull(nexus.stringArg()), 
+            
+            // --- NEW: Added fields from the registration form ---
+            phoneNumber: nexus.stringArg(),
+            minGuests: nexus.intArg(),
+            maxGuests: nexus.intArg(),
+            yearsOfExperience: nexus.intArg(),
+            
+            instagram: nexus.stringArg(),
+            portfolio: nexus.stringArg(),
+            bio: nexus.arg({ type: 'JSON' }),
+          },
+          async resolve(parent: any, args: any, ctx: any) {
+            const { 
+              username, email, password, name,
+              phoneNumber, minGuests, maxGuests, yearsOfExperience,
+              instagram, portfolio, bio 
+            } = args;
+
+            // 1. Find the 'Chef' role ID
+            const chefRole = await strapi.db.query('plugin::users-permissions.role').findOne({
+              where: { name: 'Chef' } 
+            });
+
+            if (!chefRole) {
+              throw new Error('Chef role not found. Please create it in the admin panel.');
+            }
+
+            // 2. Create the User
+            const user = await strapi.plugin('users-permissions').service('user').add({
+              username,
+              email,
+              password,
+              role: chefRole.id,
+              confirmed: true,
+              provider: 'local',
+            });
+
+            // 3. Create the Chef Profile and link it to the User
+            const chef = await strapi.entityService.create('api::chef.chef', {
+              data: {
+                name: name,
+                user: user.id,
+            
+                phoneNumber,
+                minGuests,
+                maxGuests,
+                yearsOfExperience,
+                socialLinks: {
+                  instagram,
+                  portfolio,
+                },
+                bio,
+                isVerified: false,
+                rating: 0,
+                reviewCount: 0,
+                priceRange: 'Standard', 
+                publishedAt: new Date().toISOString(),
+              },
+            });
+
+            // 4. Generate JWT Token
+            const jwt = strapi.plugin('users-permissions').service('jwt').issue({ id: user.id });
+
+            return {
+              jwt,
+              user,
+              chef,
+            };
+          }
+        });
+      }
+    }),
 
     nexus.extendType({
       type: 'Chef',
       definition(t: any) {
-        // This field provides discount info
         t.boolean('hasActiveDiscount', {
           description: 'Whether the chef has any active discounts right now',
           async resolve(chef: any) {
-            console.log(chef);
             const idToUse = chef.documentId || chef.id;
             if (!idToUse) return false;
             const bestRule = await findBestActiveRule(strapi, idToUse);
@@ -64,14 +141,13 @@ export default ({ nexus }: { nexus: any }) => ({
           }
         });
 
-        // Expose the 'isVerified' field
         t.boolean('isVerified', {
           description: 'Whether the chef has a clear criminal history check',
           resolve: (chef: any) => chef.isVerified,
         });
       }
     }),
-    
+
     nexus.extendType({
       type: 'Query',
       definition(t: any) {
@@ -81,11 +157,9 @@ export default ({ nexus }: { nexus: any }) => ({
             latitude: nexus.floatArg(),
             longitude: nexus.floatArg(),
             radius: nexus.floatArg({ default: 10 }),
-            // --- THE FIX: Use 'JSON' as the type for filters and pagination ---
             filters: nexus.arg({ type: 'JSON' }),
             sort: nexus.list(nexus.stringArg()),
             pagination: nexus.arg({ type: 'JSON' }),
-            // -----------------------------------------------------------------
           },
           async resolve(root: any, args: ResolverArgs, ctx: any) {
             const { latitude, longitude, radius, filters, sort, pagination } = args;
@@ -98,7 +172,7 @@ export default ({ nexus }: { nexus: any }) => ({
                 filters: gqlFilters || {},
                 sort: sortString,
                 pagination: pagination || {},
-                populate: ['imageUrl', 'cuisines', 'specialtyDishes'],
+                populate: ['imageUrl', 'cuisines', 'specialtyDishes', 'availability', 'holidays'],
               });
 
               return {
@@ -110,8 +184,8 @@ export default ({ nexus }: { nexus: any }) => ({
             const { results: allFilteredChefs } = await (strapi as any).service('api::chef.chef').find({
               filters: gqlFilters || {},
               sort: sortString,
-              pagination: { start: 0, limit: -1 }, // Fetch all
-              populate: ['imageUrl', 'cuisines', 'specialtyDishes'],
+              pagination: { start: 0, limit: -1 },
+              populate: ['imageUrl', 'cuisines', 'specialtyDishes', 'availability', 'holidays'],
             });
 
             const nearbyChefs = allFilteredChefs.filter((chef: any) => {
@@ -144,6 +218,10 @@ export default ({ nexus }: { nexus: any }) => ({
         });
       }
     })
-  ]
+  ],
+  resolversConfig: {
+    'Mutation.registerChef': {
+      auth: false,
+    },
+  },
 });
-
